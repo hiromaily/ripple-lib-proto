@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package rippleapi;
+
+option java_package = "com.github.hiromaily.ripple-lib.protobuf";
+option java_outer_classname = "RippleAPI";
+option go_package = "rippleapi";
+
+enum EnumTransactionType {
+  TX_ACCOUNT_SET = 0;      // AccountSet
+  TX_ACCOUNT_DELETE = 1;   // AccountDelete
+  TX_CHECK_CANCEL = 2;     // CheckCancel
+  TX_CHECK_CASH = 3;       // CheckCash
+  TX_CHECK_CREATE = 4;     // CheckCreate
+  TX_DEPOSIT_PREAUTH = 5;  // DepositPreauth
+  TX_ESCROW_CANCEL = 6;    // EscrowCancel
+  TX_ESCROW_CREATE = 7;    // EscrowCreate
+  TX_ESCROW_FINISH = 8;    // EscrowFinish
+  TX_OFFER_CANCEL = 9;     // OfferCancel
+  TX_OFFER_CREATE = 10;    // OfferCreate
+  TX_PAYMENT = 11;         // Payment
+  TX_PAYMENT_CHANNEL_CLAIM = 12;   // PaymentChannelClaim
+  TX_PAYMENT_CHANNEL_CREATE = 13;  // PaymentChannelCreate
+  TX_PAYMENT_CHANNEL_FUND = 14;    // PaymentChannelFund
+  TX_SET_REGULAR_KEY = 15;         // SetRegularKey
+  TX_SINGER_LIST_SET = 16;         // SignerListSet
+  TX_TRUST_SET = 17;       // TrustSet
+}
+
+message Instructions {
+  string fee = 1;
+  string maxFee = 2;
+  uint32 maxLedgerVersion = 3;
+  uint32 maxLedgerVersionOffset = 4;
+  uint32 sequence = 5;
+  uint32 signersCount = 6;
+}
+
+message RequestPrepareTransaction {
+  EnumTransactionType tx_type = 1;
+  string senderAccount = 2;
+  double amount = 3;
+  //float amount = 3;
+  string receiverAccount = 4;
+  Instructions instructions = 5;
+}
+
+message ResponsePrepareTransaction {
+  string txJSON = 1;
+  Instructions instructions = 2;
+}
+
+// RippleAPI 
+service RippleAPI {
+  // https://xrpl.org/rippleapi-reference.html#preparetransaction
+  rpc PrepareTransaction(RequestPrepareTransaction) returns (ResponsePrepareTransaction) {}
+}
