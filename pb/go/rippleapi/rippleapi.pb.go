@@ -309,22 +309,22 @@ func (m *ResponsePrepareTransaction) GetInstructions() *Instructions {
 	return nil
 }
 
-type RequestSign struct {
+type RequestSignTransaction struct {
 	TxJSON string `protobuf:"bytes,1,opt,name=txJSON,proto3" json:"txJSON,omitempty"`
 	Secret string `protobuf:"bytes,2,opt,name=secret,proto3" json:"secret,omitempty"`
 }
 
-func (m *RequestSign) Reset()      { *m = RequestSign{} }
-func (*RequestSign) ProtoMessage() {}
-func (*RequestSign) Descriptor() ([]byte, []int) {
+func (m *RequestSignTransaction) Reset()      { *m = RequestSignTransaction{} }
+func (*RequestSignTransaction) ProtoMessage() {}
+func (*RequestSignTransaction) Descriptor() ([]byte, []int) {
 	return fileDescriptor_294224101de536c3, []int{3}
 }
-func (m *RequestSign) XXX_Unmarshal(b []byte) error {
+func (m *RequestSignTransaction) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *RequestSign) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *RequestSignTransaction) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_RequestSign.Marshal(b, m, deterministic)
+		return xxx_messageInfo_RequestSignTransaction.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -334,48 +334,48 @@ func (m *RequestSign) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (m *RequestSign) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RequestSign.Merge(m, src)
+func (m *RequestSignTransaction) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RequestSignTransaction.Merge(m, src)
 }
-func (m *RequestSign) XXX_Size() int {
+func (m *RequestSignTransaction) XXX_Size() int {
 	return m.Size()
 }
-func (m *RequestSign) XXX_DiscardUnknown() {
-	xxx_messageInfo_RequestSign.DiscardUnknown(m)
+func (m *RequestSignTransaction) XXX_DiscardUnknown() {
+	xxx_messageInfo_RequestSignTransaction.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_RequestSign proto.InternalMessageInfo
+var xxx_messageInfo_RequestSignTransaction proto.InternalMessageInfo
 
-func (m *RequestSign) GetTxJSON() string {
+func (m *RequestSignTransaction) GetTxJSON() string {
 	if m != nil {
 		return m.TxJSON
 	}
 	return ""
 }
 
-func (m *RequestSign) GetSecret() string {
+func (m *RequestSignTransaction) GetSecret() string {
 	if m != nil {
 		return m.Secret
 	}
 	return ""
 }
 
-type ResponseSign struct {
+type ResponseSignTransaction struct {
 	TxID   string `protobuf:"bytes,1,opt,name=txID,proto3" json:"txID,omitempty"`
 	TxBlob string `protobuf:"bytes,2,opt,name=txBlob,proto3" json:"txBlob,omitempty"`
 }
 
-func (m *ResponseSign) Reset()      { *m = ResponseSign{} }
-func (*ResponseSign) ProtoMessage() {}
-func (*ResponseSign) Descriptor() ([]byte, []int) {
+func (m *ResponseSignTransaction) Reset()      { *m = ResponseSignTransaction{} }
+func (*ResponseSignTransaction) ProtoMessage() {}
+func (*ResponseSignTransaction) Descriptor() ([]byte, []int) {
 	return fileDescriptor_294224101de536c3, []int{4}
 }
-func (m *ResponseSign) XXX_Unmarshal(b []byte) error {
+func (m *ResponseSignTransaction) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ResponseSign) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *ResponseSignTransaction) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ResponseSign.Marshal(b, m, deterministic)
+		return xxx_messageInfo_ResponseSignTransaction.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -385,30 +385,124 @@ func (m *ResponseSign) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return b[:n], nil
 	}
 }
-func (m *ResponseSign) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ResponseSign.Merge(m, src)
+func (m *ResponseSignTransaction) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ResponseSignTransaction.Merge(m, src)
 }
-func (m *ResponseSign) XXX_Size() int {
+func (m *ResponseSignTransaction) XXX_Size() int {
 	return m.Size()
 }
-func (m *ResponseSign) XXX_DiscardUnknown() {
-	xxx_messageInfo_ResponseSign.DiscardUnknown(m)
+func (m *ResponseSignTransaction) XXX_DiscardUnknown() {
+	xxx_messageInfo_ResponseSignTransaction.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ResponseSign proto.InternalMessageInfo
+var xxx_messageInfo_ResponseSignTransaction proto.InternalMessageInfo
 
-func (m *ResponseSign) GetTxID() string {
+func (m *ResponseSignTransaction) GetTxID() string {
 	if m != nil {
 		return m.TxID
 	}
 	return ""
 }
 
-func (m *ResponseSign) GetTxBlob() string {
+func (m *ResponseSignTransaction) GetTxBlob() string {
 	if m != nil {
 		return m.TxBlob
 	}
 	return ""
+}
+
+type RequestSubmitTransaction struct {
+	TxBlob string `protobuf:"bytes,1,opt,name=txBlob,proto3" json:"txBlob,omitempty"`
+}
+
+func (m *RequestSubmitTransaction) Reset()      { *m = RequestSubmitTransaction{} }
+func (*RequestSubmitTransaction) ProtoMessage() {}
+func (*RequestSubmitTransaction) Descriptor() ([]byte, []int) {
+	return fileDescriptor_294224101de536c3, []int{5}
+}
+func (m *RequestSubmitTransaction) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *RequestSubmitTransaction) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_RequestSubmitTransaction.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *RequestSubmitTransaction) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RequestSubmitTransaction.Merge(m, src)
+}
+func (m *RequestSubmitTransaction) XXX_Size() int {
+	return m.Size()
+}
+func (m *RequestSubmitTransaction) XXX_DiscardUnknown() {
+	xxx_messageInfo_RequestSubmitTransaction.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RequestSubmitTransaction proto.InternalMessageInfo
+
+func (m *RequestSubmitTransaction) GetTxBlob() string {
+	if m != nil {
+		return m.TxBlob
+	}
+	return ""
+}
+
+type ResponseSubmitTransaction struct {
+	ResultJSONString    string `protobuf:"bytes,1,opt,name=resultJSONString,proto3" json:"resultJSONString,omitempty"`
+	LatestLedgerVersion uint32 `protobuf:"varint,2,opt,name=latestLedgerVersion,proto3" json:"latestLedgerVersion,omitempty"`
+}
+
+func (m *ResponseSubmitTransaction) Reset()      { *m = ResponseSubmitTransaction{} }
+func (*ResponseSubmitTransaction) ProtoMessage() {}
+func (*ResponseSubmitTransaction) Descriptor() ([]byte, []int) {
+	return fileDescriptor_294224101de536c3, []int{6}
+}
+func (m *ResponseSubmitTransaction) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ResponseSubmitTransaction) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ResponseSubmitTransaction.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ResponseSubmitTransaction) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ResponseSubmitTransaction.Merge(m, src)
+}
+func (m *ResponseSubmitTransaction) XXX_Size() int {
+	return m.Size()
+}
+func (m *ResponseSubmitTransaction) XXX_DiscardUnknown() {
+	xxx_messageInfo_ResponseSubmitTransaction.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ResponseSubmitTransaction proto.InternalMessageInfo
+
+func (m *ResponseSubmitTransaction) GetResultJSONString() string {
+	if m != nil {
+		return m.ResultJSONString
+	}
+	return ""
+}
+
+func (m *ResponseSubmitTransaction) GetLatestLedgerVersion() uint32 {
+	if m != nil {
+		return m.LatestLedgerVersion
+	}
+	return 0
 }
 
 func init() {
@@ -416,62 +510,69 @@ func init() {
 	proto.RegisterType((*Instructions)(nil), "rippleapi.Instructions")
 	proto.RegisterType((*RequestPrepareTransaction)(nil), "rippleapi.RequestPrepareTransaction")
 	proto.RegisterType((*ResponsePrepareTransaction)(nil), "rippleapi.ResponsePrepareTransaction")
-	proto.RegisterType((*RequestSign)(nil), "rippleapi.RequestSign")
-	proto.RegisterType((*ResponseSign)(nil), "rippleapi.ResponseSign")
+	proto.RegisterType((*RequestSignTransaction)(nil), "rippleapi.RequestSignTransaction")
+	proto.RegisterType((*ResponseSignTransaction)(nil), "rippleapi.ResponseSignTransaction")
+	proto.RegisterType((*RequestSubmitTransaction)(nil), "rippleapi.RequestSubmitTransaction")
+	proto.RegisterType((*ResponseSubmitTransaction)(nil), "rippleapi.ResponseSubmitTransaction")
 }
 
 func init() { proto.RegisterFile("rippleapi/rippleapi.proto", fileDescriptor_294224101de536c3) }
 
 var fileDescriptor_294224101de536c3 = []byte{
-	// 761 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0x4f, 0x8f, 0xda, 0x46,
-	0x14, 0xb7, 0x17, 0x42, 0xc2, 0x5b, 0xfe, 0xcc, 0x4e, 0x5a, 0x96, 0xa5, 0xad, 0x15, 0xa1, 0x54,
-	0x42, 0x91, 0x4a, 0xa5, 0xad, 0xd4, 0x4a, 0xad, 0x7a, 0xf0, 0x9a, 0x21, 0xb8, 0x21, 0x06, 0x8d,
-	0x87, 0x96, 0xf4, 0x62, 0x19, 0x67, 0x20, 0x96, 0xc0, 0x76, 0x6c, 0x53, 0xb1, 0xb7, 0x7e, 0x84,
-	0x7e, 0x8c, 0x5e, 0x7a, 0xed, 0x67, 0xe8, 0x71, 0x8f, 0x39, 0xf4, 0xd0, 0x65, 0x2f, 0x3d, 0xe6,
-	0xda, 0x5b, 0xe5, 0x3f, 0x2c, 0x78, 0x17, 0x0e, 0x39, 0x79, 0xde, 0xef, 0xbd, 0xdf, 0x7b, 0x7e,
-	0xbf, 0xf7, 0x66, 0xe0, 0xcc, 0xb7, 0x3d, 0x6f, 0xce, 0x4d, 0xcf, 0xfe, 0xf2, 0xf6, 0xd4, 0xf6,
-	0x7c, 0x37, 0x74, 0x71, 0xf1, 0x16, 0x68, 0xfe, 0x2d, 0x42, 0x49, 0x75, 0x82, 0xd0, 0x5f, 0x5a,
-	0xa1, 0xed, 0x3a, 0x01, 0x46, 0x90, 0x9b, 0x72, 0x5e, 0x17, 0x9f, 0x88, 0xad, 0x22, 0x8d, 0x8e,
-	0xb8, 0x06, 0x85, 0x85, 0xb9, 0xea, 0x72, 0x5e, 0x3f, 0x8a, 0xc1, 0xd4, 0xc2, 0xcf, 0x00, 0x2d,
-	0xcc, 0x55, 0x9f, 0xbf, 0x9e, 0x71, 0xff, 0x47, 0xee, 0x07, 0xb6, 0xeb, 0xd4, 0x73, 0x4f, 0xc4,
-	0x56, 0x99, 0xde, 0xc3, 0xf1, 0xd7, 0x50, 0xbb, 0x8b, 0x0d, 0xa6, 0xd3, 0x80, 0x87, 0xf5, 0x7c,
-	0xcc, 0x38, 0xe0, 0xc5, 0x0d, 0x78, 0x14, 0xf0, 0xb7, 0x4b, 0xee, 0x58, 0xbc, 0xfe, 0x20, 0x8e,
-	0xbc, 0xb5, 0x71, 0x13, 0x4a, 0x81, 0x3d, 0x73, 0xb8, 0x1f, 0x28, 0xee, 0xd2, 0x09, 0xeb, 0x85,
-	0xd8, 0x9f, 0xc1, 0x9a, 0xff, 0x89, 0x70, 0x46, 0x23, 0x42, 0x10, 0x0e, 0x7d, 0xee, 0x99, 0x3e,
-	0x67, 0xbe, 0xe9, 0x04, 0x66, 0xdc, 0x2c, 0xfe, 0x06, 0x1e, 0x86, 0x2b, 0x23, 0xbc, 0xf4, 0x92,
-	0x7e, 0x2b, 0xe7, 0x52, 0x7b, 0x2b, 0x15, 0x71, 0x96, 0x8b, 0x9d, 0x60, 0x76, 0xe9, 0x71, 0x5a,
-	0x08, 0x57, 0xd1, 0x17, 0x3f, 0x85, 0x72, 0xc0, 0x9d, 0xd7, 0xdc, 0x97, 0x2d, 0x2b, 0xae, 0x9d,
-	0x28, 0x93, 0x05, 0x23, 0xe1, 0xcc, 0x45, 0xec, 0x8e, 0x64, 0x11, 0x69, 0x6a, 0xe1, 0x16, 0x54,
-	0x7d, 0x6e, 0x71, 0xfb, 0x97, 0x2d, 0x3f, 0x1f, 0xf3, 0xef, 0xc2, 0xf8, 0x3b, 0x28, 0xd9, 0x3b,
-	0xc3, 0x89, 0x25, 0x38, 0x3e, 0x3f, 0xdd, 0xf9, 0xcb, 0xdd, 0xd9, 0xd1, 0x4c, 0x70, 0xf3, 0x2d,
-	0x34, 0x28, 0x0f, 0x3c, 0xd7, 0x09, 0xf8, 0x9e, 0xde, 0x6b, 0x50, 0x08, 0x57, 0x3f, 0xe8, 0x03,
-	0x2d, 0x1d, 0x75, 0x6a, 0xdd, 0x2b, 0x79, 0xf4, 0x21, 0x25, 0xbf, 0x87, 0xe3, 0x54, 0x6d, 0xdd,
-	0x9e, 0x1d, 0xae, 0x51, 0x83, 0x42, 0xc0, 0x2d, 0x9f, 0x6f, 0x74, 0x4b, 0xad, 0xe6, 0xb7, 0x50,
-	0xda, 0xfc, 0x71, 0xcc, 0xc7, 0x90, 0x0f, 0x57, 0x6a, 0x27, 0x65, 0xc7, 0xe7, 0x24, 0xe7, 0xc5,
-	0xdc, 0x9d, 0x6c, 0xb8, 0x89, 0xf5, 0xec, 0x8f, 0x1c, 0x3c, 0xde, 0x33, 0x32, 0x8c, 0xa1, 0xc2,
-	0xc6, 0x86, 0xac, 0x28, 0x83, 0x91, 0xc6, 0x0c, 0x9d, 0x30, 0x24, 0xe0, 0x8f, 0xe1, 0x64, 0x07,
-	0xeb, 0x90, 0x3e, 0x61, 0x04, 0x89, 0xf8, 0x31, 0x54, 0xd9, 0xd8, 0x50, 0x7a, 0x44, 0x79, 0x61,
-	0x28, 0xb2, 0xa6, 0x90, 0x3e, 0x3a, 0xc2, 0x27, 0x50, 0xde, 0x01, 0xf5, 0x1e, 0xca, 0x65, 0xe3,
-	0x28, 0x91, 0x19, 0x41, 0x79, 0x5c, 0x03, 0xcc, 0xc6, 0x46, 0x87, 0x0c, 0x07, 0xba, 0xca, 0x8c,
-	0x21, 0x25, 0xf2, 0x88, 0xf5, 0xd0, 0x03, 0xfc, 0x11, 0x20, 0x36, 0x36, 0x88, 0xae, 0xd0, 0xc1,
-	0x4f, 0x9b, 0xac, 0x85, 0x3b, 0x68, 0x92, 0xe3, 0x61, 0x16, 0xed, 0xaa, 0x9a, 0xaa, 0xf7, 0xd0,
-	0xa3, 0xb4, 0xdc, 0xa0, 0xdb, 0x25, 0x74, 0x93, 0xa0, 0x98, 0x05, 0x13, 0x3e, 0xe0, 0x0a, 0x00,
-	0x1b, 0x1b, 0x43, 0xf9, 0xd5, 0x4b, 0xa2, 0x31, 0x74, 0x8c, 0x3f, 0x85, 0xfa, 0xd6, 0x36, 0x94,
-	0x9e, 0xac, 0x69, 0xa4, 0x6f, 0x28, 0x7d, 0x59, 0x7d, 0x89, 0x4a, 0xf8, 0x33, 0x38, 0xdb, 0xe7,
-	0x4d, 0x92, 0x95, 0xf1, 0x27, 0x70, 0xba, 0xc7, 0xdd, 0x1d, 0x69, 0x1d, 0x54, 0x49, 0xbb, 0xd5,
-	0x09, 0x33, 0x28, 0x79, 0x3e, 0xea, 0xcb, 0xd4, 0x78, 0x41, 0x5e, 0xa1, 0xea, 0x06, 0x57, 0xb5,
-	0xe7, 0x84, 0x1a, 0x7d, 0x55, 0x4f, 0x14, 0x47, 0x18, 0x41, 0x89, 0x8d, 0x0d, 0x46, 0x47, 0x29,
-	0x72, 0x72, 0xfe, 0xa7, 0x08, 0x45, 0x1a, 0xef, 0x94, 0x3c, 0x54, 0xb1, 0x05, 0x78, 0xcf, 0x8e,
-	0x3e, 0xdd, 0xd9, 0xba, 0x83, 0xb7, 0xb8, 0xf1, 0x79, 0x26, 0xea, 0xd0, 0xc2, 0x37, 0x05, 0xdc,
-	0x81, 0x6a, 0xb4, 0x56, 0x99, 0x5b, 0x70, 0xbf, 0x42, 0x14, 0xd2, 0x38, 0xdd, 0x93, 0x33, 0x72,
-	0x34, 0x85, 0x8b, 0xf0, 0xea, 0x5a, 0x12, 0xde, 0x5d, 0x4b, 0xc2, 0xfb, 0x6b, 0x49, 0xfc, 0x75,
-	0x2d, 0x89, 0xbf, 0xaf, 0x25, 0xf1, 0xaf, 0xb5, 0x24, 0x5e, 0xad, 0x25, 0xf1, 0x9f, 0xb5, 0x24,
-	0xfe, 0xbb, 0x96, 0x84, 0xf7, 0x6b, 0x49, 0xfc, 0xed, 0x46, 0x12, 0xae, 0x6e, 0x24, 0xe1, 0xdd,
-	0x8d, 0x24, 0x40, 0xcb, 0x72, 0x17, 0xed, 0x99, 0x1d, 0xbe, 0x59, 0x4e, 0xda, 0x6f, 0x6c, 0xdf,
-	0x5d, 0x98, 0xf6, 0xfc, 0x32, 0x2d, 0xf2, 0xc5, 0xdc, 0x9e, 0x24, 0x2f, 0xf3, 0x64, 0x39, 0xbd,
-	0xd8, 0xaa, 0xf2, 0xf3, 0xf6, 0x9d, 0x9e, 0x14, 0x62, 0xff, 0x57, 0xff, 0x07, 0x00, 0x00, 0xff,
-	0xff, 0xe4, 0x44, 0xfb, 0xf3, 0xd6, 0x05, 0x00, 0x00,
+	// 836 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x55, 0x41, 0x73, 0xdb, 0x44,
+	0x14, 0x96, 0x9c, 0xd4, 0x6d, 0x5e, 0x9d, 0x64, 0xb3, 0x01, 0xc7, 0x31, 0xa0, 0x29, 0x22, 0xcc,
+	0x64, 0x32, 0x43, 0x60, 0xc2, 0x0c, 0x1c, 0x38, 0x29, 0xca, 0xba, 0x16, 0x75, 0x65, 0xcf, 0x6a,
+	0x0d, 0x6e, 0x2f, 0x42, 0x76, 0x37, 0xae, 0x66, 0x6c, 0xc9, 0x95, 0x56, 0x8c, 0x73, 0xe3, 0x27,
+	0xf0, 0x33, 0xb8, 0xc0, 0xef, 0xe0, 0x98, 0x63, 0x0f, 0x1c, 0x88, 0x73, 0xe1, 0xd8, 0x2b, 0x37,
+	0xc6, 0x92, 0x1c, 0x5b, 0xb2, 0x32, 0x43, 0x4f, 0xde, 0xf7, 0xbd, 0xef, 0xfb, 0xde, 0xee, 0xdb,
+	0x7d, 0x16, 0x1c, 0x06, 0xee, 0x64, 0x32, 0xe2, 0xce, 0xc4, 0xfd, 0xf2, 0x6e, 0x75, 0x3a, 0x09,
+	0x7c, 0xe1, 0xe3, 0xad, 0x3b, 0x40, 0xfd, 0x4b, 0x86, 0x8a, 0xe1, 0x85, 0x22, 0x88, 0x06, 0xc2,
+	0xf5, 0xbd, 0x10, 0x23, 0xd8, 0xb8, 0xe4, 0xbc, 0x26, 0x3f, 0x91, 0x8f, 0xb7, 0xe8, 0x7c, 0x89,
+	0xab, 0x50, 0x1e, 0x3b, 0xd3, 0x06, 0xe7, 0xb5, 0x52, 0x0c, 0xa6, 0x11, 0x3e, 0x01, 0x34, 0x76,
+	0xa6, 0x2d, 0xfe, 0x6a, 0xc8, 0x83, 0x1f, 0x78, 0x10, 0xba, 0xbe, 0x57, 0xdb, 0x78, 0x22, 0x1f,
+	0x6f, 0xd3, 0x35, 0x1c, 0x7f, 0x03, 0xd5, 0x3c, 0xd6, 0xbe, 0xbc, 0x0c, 0xb9, 0xa8, 0x6d, 0xc6,
+	0x8a, 0x7b, 0xb2, 0xb8, 0x0e, 0x8f, 0x42, 0xfe, 0x26, 0xe2, 0xde, 0x80, 0xd7, 0x1e, 0xc4, 0xcc,
+	0xbb, 0x18, 0xab, 0x50, 0x09, 0xdd, 0xa1, 0xc7, 0x83, 0x50, 0xf7, 0x23, 0x4f, 0xd4, 0xca, 0x71,
+	0x3e, 0x83, 0xa9, 0xff, 0xca, 0x70, 0x48, 0xe7, 0x82, 0x50, 0x74, 0x02, 0x3e, 0x71, 0x02, 0xce,
+	0x02, 0xc7, 0x0b, 0x9d, 0xf8, 0xb0, 0xf8, 0x5b, 0x78, 0x28, 0xa6, 0xb6, 0xb8, 0x9a, 0x24, 0xe7,
+	0xdd, 0x39, 0x53, 0x4e, 0x97, 0xad, 0x22, 0x5e, 0x34, 0x5e, 0x21, 0xb3, 0xab, 0x09, 0xa7, 0x65,
+	0x31, 0x9d, 0xff, 0xe2, 0x23, 0xd8, 0x0e, 0xb9, 0xf7, 0x8a, 0x07, 0xda, 0x60, 0x10, 0xd7, 0x4e,
+	0x3a, 0x93, 0x05, 0xe7, 0x8d, 0x73, 0xc6, 0x71, 0x7a, 0xde, 0x16, 0x99, 0xa6, 0x11, 0x3e, 0x86,
+	0xdd, 0x80, 0x0f, 0xb8, 0xfb, 0xf3, 0x52, 0xbf, 0x19, 0xeb, 0xf3, 0x30, 0xfe, 0x0e, 0x2a, 0xee,
+	0xca, 0xe5, 0xc4, 0x2d, 0x78, 0x7c, 0x76, 0xb0, 0xb2, 0xcb, 0xd5, 0xbb, 0xa3, 0x19, 0xb2, 0xfa,
+	0x06, 0xea, 0x94, 0x87, 0x13, 0xdf, 0x0b, 0x79, 0xc1, 0xd9, 0xab, 0x50, 0x16, 0xd3, 0xef, 0xad,
+	0xb6, 0x99, 0x5e, 0x75, 0x1a, 0xad, 0x95, 0x2c, 0xbd, 0x4f, 0xc9, 0x26, 0x54, 0xd3, 0x6e, 0x5b,
+	0xee, 0xd0, 0xfb, 0x3f, 0xe5, 0xaa, 0x50, 0x0e, 0xf9, 0x20, 0xe0, 0x8b, 0x16, 0xa6, 0x91, 0x4a,
+	0xe0, 0x60, 0xb1, 0xf9, 0xbc, 0x15, 0x86, 0x4d, 0x31, 0x35, 0x2e, 0x52, 0xa3, 0x78, 0x9d, 0xd8,
+	0x9f, 0x8f, 0xfc, 0xfe, 0xc2, 0x26, 0x89, 0xd4, 0x33, 0xa8, 0x2d, 0x36, 0x14, 0xf5, 0xc7, 0xae,
+	0x58, 0xdb, 0x52, 0xac, 0x91, 0x33, 0x9a, 0xab, 0xf9, 0x93, 0x49, 0x4b, 0xaf, 0x89, 0x4e, 0x00,
+	0x05, 0x3c, 0x8c, 0x46, 0x62, 0xbe, 0x7b, 0x4b, 0x04, 0xae, 0x37, 0x4c, 0xe5, 0x6b, 0x38, 0xfe,
+	0x0a, 0xf6, 0x47, 0x8e, 0xe0, 0xa1, 0xc8, 0xce, 0x48, 0x29, 0x7e, 0xa7, 0x45, 0xa9, 0x93, 0xdf,
+	0x37, 0x60, 0xbf, 0xe0, 0xdd, 0x61, 0x0c, 0x3b, 0xac, 0x67, 0x6b, 0xba, 0xde, 0xee, 0x9a, 0xcc,
+	0xb6, 0x08, 0x43, 0x12, 0xfe, 0x10, 0xf6, 0x56, 0xb0, 0x0b, 0xd2, 0x22, 0x8c, 0x20, 0x19, 0xef,
+	0xc3, 0x2e, 0xeb, 0xd9, 0x7a, 0x93, 0xe8, 0xcf, 0x6c, 0x5d, 0x33, 0x75, 0xd2, 0x42, 0x25, 0xbc,
+	0x07, 0xdb, 0x2b, 0xa0, 0xd5, 0x44, 0x1b, 0x59, 0x1e, 0x25, 0x1a, 0x23, 0x68, 0x13, 0x57, 0x01,
+	0xb3, 0x9e, 0x7d, 0x41, 0x3a, 0x6d, 0xcb, 0x60, 0x76, 0x87, 0x12, 0xad, 0xcb, 0x9a, 0xe8, 0x01,
+	0xfe, 0x00, 0x10, 0xeb, 0xd9, 0xc4, 0xd2, 0x69, 0xfb, 0xc7, 0x85, 0x6b, 0x39, 0x87, 0x26, 0x1e,
+	0x0f, 0xb3, 0x68, 0xc3, 0x30, 0x0d, 0xab, 0x89, 0x1e, 0xa5, 0xe5, 0xda, 0x8d, 0x06, 0xa1, 0x0b,
+	0x83, 0xad, 0x2c, 0x98, 0xe8, 0x01, 0xef, 0x00, 0xb0, 0x9e, 0xdd, 0xd1, 0x5e, 0x3c, 0x27, 0x26,
+	0x43, 0x8f, 0xf1, 0xc7, 0x50, 0x5b, 0xc6, 0xb6, 0xde, 0xd4, 0x4c, 0x93, 0xb4, 0x6c, 0xbd, 0xa5,
+	0x19, 0xcf, 0x51, 0x05, 0x7f, 0x02, 0x87, 0x45, 0xd9, 0xc4, 0x6c, 0x1b, 0x7f, 0x04, 0x07, 0x05,
+	0xe9, 0x46, 0xd7, 0xbc, 0x40, 0x3b, 0xe9, 0x69, 0x2d, 0xc2, 0x6c, 0x4a, 0x9e, 0x76, 0x5b, 0x1a,
+	0xb5, 0x9f, 0x91, 0x17, 0x68, 0x77, 0x81, 0x1b, 0xe6, 0x53, 0x42, 0xed, 0x96, 0x61, 0x25, 0x1d,
+	0x47, 0x18, 0x41, 0x85, 0xf5, 0x6c, 0x46, 0xbb, 0x29, 0xb2, 0x77, 0xf6, 0x47, 0x09, 0xb6, 0x68,
+	0x3c, 0x18, 0x5a, 0xc7, 0xc0, 0x03, 0xc0, 0x05, 0x83, 0x76, 0xb4, 0x32, 0x3a, 0xf7, 0xfe, 0x15,
+	0xd5, 0x3f, 0xcf, 0xb0, 0xee, 0x9b, 0x5a, 0x55, 0xc2, 0x2f, 0x61, 0x37, 0x3f, 0x10, 0x9f, 0xae,
+	0x57, 0xc8, 0x51, 0xea, 0x6a, 0x81, 0x7d, 0x8e, 0xa3, 0x4a, 0xf8, 0x27, 0xd8, 0x5b, 0x7f, 0xf1,
+	0x9f, 0x15, 0xb8, 0xe7, 0x49, 0xf5, 0xa3, 0x22, 0xff, 0x3c, 0x4b, 0x95, 0xce, 0xc5, 0xf5, 0x8d,
+	0x22, 0xbd, 0xbd, 0x51, 0xa4, 0x77, 0x37, 0x8a, 0xfc, 0xcb, 0x4c, 0x91, 0x7f, 0x9b, 0x29, 0xf2,
+	0x9f, 0x33, 0x45, 0xbe, 0x9e, 0x29, 0xf2, 0xdf, 0x33, 0x45, 0xfe, 0x67, 0xa6, 0x48, 0xef, 0x66,
+	0x8a, 0xfc, 0xeb, 0xad, 0x22, 0x5d, 0xdf, 0x2a, 0xd2, 0xdb, 0x5b, 0x45, 0x82, 0xe3, 0x81, 0x3f,
+	0x3e, 0x1d, 0xba, 0xe2, 0x75, 0xd4, 0x3f, 0x7d, 0xed, 0x06, 0xfe, 0xd8, 0x71, 0x47, 0x57, 0x69,
+	0xc5, 0x2f, 0x46, 0x6e, 0x3f, 0xf9, 0xac, 0xf5, 0xa3, 0xcb, 0xf3, 0xe5, 0x6d, 0xbc, 0x5c, 0x7e,
+	0xe4, 0xfa, 0xe5, 0x38, 0xff, 0xf5, 0x7f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xfc, 0x87, 0xab, 0x0e,
+	0x13, 0x07, 0x00, 0x00,
 }
 
 func (x EnumTransactionType) String() string {
@@ -583,14 +684,14 @@ func (this *ResponsePrepareTransaction) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *RequestSign) Equal(that interface{}) bool {
+func (this *RequestSignTransaction) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*RequestSign)
+	that1, ok := that.(*RequestSignTransaction)
 	if !ok {
-		that2, ok := that.(RequestSign)
+		that2, ok := that.(RequestSignTransaction)
 		if ok {
 			that1 = &that2
 		} else {
@@ -610,14 +711,14 @@ func (this *RequestSign) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ResponseSign) Equal(that interface{}) bool {
+func (this *ResponseSignTransaction) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ResponseSign)
+	that1, ok := that.(*ResponseSignTransaction)
 	if !ok {
-		that2, ok := that.(ResponseSign)
+		that2, ok := that.(ResponseSignTransaction)
 		if ok {
 			that1 = &that2
 		} else {
@@ -633,6 +734,57 @@ func (this *ResponseSign) Equal(that interface{}) bool {
 		return false
 	}
 	if this.TxBlob != that1.TxBlob {
+		return false
+	}
+	return true
+}
+func (this *RequestSubmitTransaction) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*RequestSubmitTransaction)
+	if !ok {
+		that2, ok := that.(RequestSubmitTransaction)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.TxBlob != that1.TxBlob {
+		return false
+	}
+	return true
+}
+func (this *ResponseSubmitTransaction) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*ResponseSubmitTransaction)
+	if !ok {
+		that2, ok := that.(ResponseSubmitTransaction)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.ResultJSONString != that1.ResultJSONString {
+		return false
+	}
+	if this.LatestLedgerVersion != that1.LatestLedgerVersion {
 		return false
 	}
 	return true
@@ -681,25 +833,46 @@ func (this *ResponsePrepareTransaction) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *RequestSign) GoString() string {
+func (this *RequestSignTransaction) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 6)
-	s = append(s, "&rippleapi.RequestSign{")
+	s = append(s, "&rippleapi.RequestSignTransaction{")
 	s = append(s, "TxJSON: "+fmt.Sprintf("%#v", this.TxJSON)+",\n")
 	s = append(s, "Secret: "+fmt.Sprintf("%#v", this.Secret)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ResponseSign) GoString() string {
+func (this *ResponseSignTransaction) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 6)
-	s = append(s, "&rippleapi.ResponseSign{")
+	s = append(s, "&rippleapi.ResponseSignTransaction{")
 	s = append(s, "TxID: "+fmt.Sprintf("%#v", this.TxID)+",\n")
 	s = append(s, "TxBlob: "+fmt.Sprintf("%#v", this.TxBlob)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *RequestSubmitTransaction) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&rippleapi.RequestSubmitTransaction{")
+	s = append(s, "TxBlob: "+fmt.Sprintf("%#v", this.TxBlob)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *ResponseSubmitTransaction) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&rippleapi.ResponseSubmitTransaction{")
+	s = append(s, "ResultJSONString: "+fmt.Sprintf("%#v", this.ResultJSONString)+",\n")
+	s = append(s, "LatestLedgerVersion: "+fmt.Sprintf("%#v", this.LatestLedgerVersion)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -726,7 +899,8 @@ const _ = grpc.SupportPackageIsVersion4
 type RippleAPIClient interface {
 	// https://xrpl.org/rippleapi-reference.html#preparetransaction
 	PrepareTransaction(ctx context.Context, in *RequestPrepareTransaction, opts ...grpc.CallOption) (*ResponsePrepareTransaction, error)
-	SignTransaction(ctx context.Context, in *RequestSign, opts ...grpc.CallOption) (*ResponseSign, error)
+	SignTransaction(ctx context.Context, in *RequestSignTransaction, opts ...grpc.CallOption) (*ResponseSignTransaction, error)
+	SubmitTransaction(ctx context.Context, in *RequestSubmitTransaction, opts ...grpc.CallOption) (*ResponseSubmitTransaction, error)
 }
 
 type rippleAPIClient struct {
@@ -746,9 +920,18 @@ func (c *rippleAPIClient) PrepareTransaction(ctx context.Context, in *RequestPre
 	return out, nil
 }
 
-func (c *rippleAPIClient) SignTransaction(ctx context.Context, in *RequestSign, opts ...grpc.CallOption) (*ResponseSign, error) {
-	out := new(ResponseSign)
+func (c *rippleAPIClient) SignTransaction(ctx context.Context, in *RequestSignTransaction, opts ...grpc.CallOption) (*ResponseSignTransaction, error) {
+	out := new(ResponseSignTransaction)
 	err := c.cc.Invoke(ctx, "/rippleapi.RippleAPI/SignTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rippleAPIClient) SubmitTransaction(ctx context.Context, in *RequestSubmitTransaction, opts ...grpc.CallOption) (*ResponseSubmitTransaction, error) {
+	out := new(ResponseSubmitTransaction)
+	err := c.cc.Invoke(ctx, "/rippleapi.RippleAPI/SubmitTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -759,7 +942,8 @@ func (c *rippleAPIClient) SignTransaction(ctx context.Context, in *RequestSign, 
 type RippleAPIServer interface {
 	// https://xrpl.org/rippleapi-reference.html#preparetransaction
 	PrepareTransaction(context.Context, *RequestPrepareTransaction) (*ResponsePrepareTransaction, error)
-	SignTransaction(context.Context, *RequestSign) (*ResponseSign, error)
+	SignTransaction(context.Context, *RequestSignTransaction) (*ResponseSignTransaction, error)
+	SubmitTransaction(context.Context, *RequestSubmitTransaction) (*ResponseSubmitTransaction, error)
 }
 
 // UnimplementedRippleAPIServer can be embedded to have forward compatible implementations.
@@ -769,8 +953,11 @@ type UnimplementedRippleAPIServer struct {
 func (*UnimplementedRippleAPIServer) PrepareTransaction(ctx context.Context, req *RequestPrepareTransaction) (*ResponsePrepareTransaction, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PrepareTransaction not implemented")
 }
-func (*UnimplementedRippleAPIServer) SignTransaction(ctx context.Context, req *RequestSign) (*ResponseSign, error) {
+func (*UnimplementedRippleAPIServer) SignTransaction(ctx context.Context, req *RequestSignTransaction) (*ResponseSignTransaction, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SignTransaction not implemented")
+}
+func (*UnimplementedRippleAPIServer) SubmitTransaction(ctx context.Context, req *RequestSubmitTransaction) (*ResponseSubmitTransaction, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitTransaction not implemented")
 }
 
 func RegisterRippleAPIServer(s *grpc.Server, srv RippleAPIServer) {
@@ -796,7 +983,7 @@ func _RippleAPI_PrepareTransaction_Handler(srv interface{}, ctx context.Context,
 }
 
 func _RippleAPI_SignTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestSign)
+	in := new(RequestSignTransaction)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -808,7 +995,25 @@ func _RippleAPI_SignTransaction_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/rippleapi.RippleAPI/SignTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RippleAPIServer).SignTransaction(ctx, req.(*RequestSign))
+		return srv.(RippleAPIServer).SignTransaction(ctx, req.(*RequestSignTransaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RippleAPI_SubmitTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSubmitTransaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RippleAPIServer).SubmitTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rippleapi.RippleAPI/SubmitTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RippleAPIServer).SubmitTransaction(ctx, req.(*RequestSubmitTransaction))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -824,6 +1029,10 @@ var _RippleAPI_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SignTransaction",
 			Handler:    _RippleAPI_SignTransaction_Handler,
+		},
+		{
+			MethodName: "SubmitTransaction",
+			Handler:    _RippleAPI_SubmitTransaction_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -989,7 +1198,7 @@ func (m *ResponsePrepareTransaction) MarshalToSizedBuffer(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
-func (m *RequestSign) Marshal() (dAtA []byte, err error) {
+func (m *RequestSignTransaction) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -999,12 +1208,12 @@ func (m *RequestSign) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *RequestSign) MarshalTo(dAtA []byte) (int, error) {
+func (m *RequestSignTransaction) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *RequestSign) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *RequestSignTransaction) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1026,7 +1235,7 @@ func (m *RequestSign) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ResponseSign) Marshal() (dAtA []byte, err error) {
+func (m *ResponseSignTransaction) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1036,12 +1245,12 @@ func (m *ResponseSign) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ResponseSign) MarshalTo(dAtA []byte) (int, error) {
+func (m *ResponseSignTransaction) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ResponseSign) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *ResponseSignTransaction) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1057,6 +1266,71 @@ func (m *ResponseSign) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.TxID)
 		copy(dAtA[i:], m.TxID)
 		i = encodeVarintRippleapi(dAtA, i, uint64(len(m.TxID)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *RequestSubmitTransaction) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *RequestSubmitTransaction) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RequestSubmitTransaction) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.TxBlob) > 0 {
+		i -= len(m.TxBlob)
+		copy(dAtA[i:], m.TxBlob)
+		i = encodeVarintRippleapi(dAtA, i, uint64(len(m.TxBlob)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ResponseSubmitTransaction) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ResponseSubmitTransaction) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ResponseSubmitTransaction) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.LatestLedgerVersion != 0 {
+		i = encodeVarintRippleapi(dAtA, i, uint64(m.LatestLedgerVersion))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.ResultJSONString) > 0 {
+		i -= len(m.ResultJSONString)
+		copy(dAtA[i:], m.ResultJSONString)
+		i = encodeVarintRippleapi(dAtA, i, uint64(len(m.ResultJSONString)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -1147,7 +1421,7 @@ func (m *ResponsePrepareTransaction) Size() (n int) {
 	return n
 }
 
-func (m *RequestSign) Size() (n int) {
+func (m *RequestSignTransaction) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1164,7 +1438,7 @@ func (m *RequestSign) Size() (n int) {
 	return n
 }
 
-func (m *ResponseSign) Size() (n int) {
+func (m *ResponseSignTransaction) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1177,6 +1451,35 @@ func (m *ResponseSign) Size() (n int) {
 	l = len(m.TxBlob)
 	if l > 0 {
 		n += 1 + l + sovRippleapi(uint64(l))
+	}
+	return n
+}
+
+func (m *RequestSubmitTransaction) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.TxBlob)
+	if l > 0 {
+		n += 1 + l + sovRippleapi(uint64(l))
+	}
+	return n
+}
+
+func (m *ResponseSubmitTransaction) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.ResultJSONString)
+	if l > 0 {
+		n += 1 + l + sovRippleapi(uint64(l))
+	}
+	if m.LatestLedgerVersion != 0 {
+		n += 1 + sovRippleapi(uint64(m.LatestLedgerVersion))
 	}
 	return n
 }
@@ -1227,24 +1530,45 @@ func (this *ResponsePrepareTransaction) String() string {
 	}, "")
 	return s
 }
-func (this *RequestSign) String() string {
+func (this *RequestSignTransaction) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&RequestSign{`,
+	s := strings.Join([]string{`&RequestSignTransaction{`,
 		`TxJSON:` + fmt.Sprintf("%v", this.TxJSON) + `,`,
 		`Secret:` + fmt.Sprintf("%v", this.Secret) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *ResponseSign) String() string {
+func (this *ResponseSignTransaction) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ResponseSign{`,
+	s := strings.Join([]string{`&ResponseSignTransaction{`,
 		`TxID:` + fmt.Sprintf("%v", this.TxID) + `,`,
 		`TxBlob:` + fmt.Sprintf("%v", this.TxBlob) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *RequestSubmitTransaction) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&RequestSubmitTransaction{`,
+		`TxBlob:` + fmt.Sprintf("%v", this.TxBlob) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ResponseSubmitTransaction) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ResponseSubmitTransaction{`,
+		`ResultJSONString:` + fmt.Sprintf("%v", this.ResultJSONString) + `,`,
+		`LatestLedgerVersion:` + fmt.Sprintf("%v", this.LatestLedgerVersion) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1754,7 +2078,7 @@ func (m *ResponsePrepareTransaction) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *RequestSign) Unmarshal(dAtA []byte) error {
+func (m *RequestSignTransaction) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1777,10 +2101,10 @@ func (m *RequestSign) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: RequestSign: wiretype end group for non-group")
+			return fmt.Errorf("proto: RequestSignTransaction: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: RequestSign: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: RequestSignTransaction: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1871,7 +2195,7 @@ func (m *RequestSign) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ResponseSign) Unmarshal(dAtA []byte) error {
+func (m *ResponseSignTransaction) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1894,10 +2218,10 @@ func (m *ResponseSign) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ResponseSign: wiretype end group for non-group")
+			return fmt.Errorf("proto: ResponseSignTransaction: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ResponseSign: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ResponseSignTransaction: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1964,6 +2288,195 @@ func (m *ResponseSign) Unmarshal(dAtA []byte) error {
 			}
 			m.TxBlob = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipRippleapi(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthRippleapi
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthRippleapi
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *RequestSubmitTransaction) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowRippleapi
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: RequestSubmitTransaction: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: RequestSubmitTransaction: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TxBlob", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowRippleapi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthRippleapi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRippleapi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TxBlob = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipRippleapi(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthRippleapi
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthRippleapi
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ResponseSubmitTransaction) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowRippleapi
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ResponseSubmitTransaction: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ResponseSubmitTransaction: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ResultJSONString", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowRippleapi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthRippleapi
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRippleapi
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ResultJSONString = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LatestLedgerVersion", wireType)
+			}
+			m.LatestLedgerVersion = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowRippleapi
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.LatestLedgerVersion |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipRippleapi(dAtA[iNdEx:])
