@@ -6,6 +6,8 @@ option java_package = "com.github.hiromaily.ripple-lib.protobuf";
 option java_outer_classname = "RippleAPI";
 option go_package = "rippleapi";
 
+import "google/protobuf/empty.proto";
+
 enum EnumTransactionType {
   TX_ACCOUNT_SET = 0;      // AccountSet
   TX_ACCOUNT_DELETE = 1;   // AccountDelete
@@ -66,7 +68,11 @@ message RequestSubmitTransaction {
 
 message ResponseSubmitTransaction {
   string resultJSONString = 1;
-  uint32 latestLedgerVersion = 2;
+  uint32 earliestLedgerVersion = 2;
+}
+
+message ResponseWaitValidation {
+  uint32 ledgerVersion = 1;
 }
 
 // RippleAPI 
@@ -75,4 +81,5 @@ service RippleAPI {
   rpc PrepareTransaction(RequestPrepareTransaction) returns (ResponsePrepareTransaction) {}
   rpc SignTransaction(RequestSignTransaction) returns (ResponseSignTransaction) {}
   rpc SubmitTransaction(RequestSubmitTransaction) returns (ResponseSubmitTransaction) {}
+  rpc WaitValidation(google.protobuf.Empty) returns (stream ResponseWaitValidation) {}
 }
