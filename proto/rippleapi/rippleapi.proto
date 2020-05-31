@@ -50,8 +50,19 @@ message ResponsePrepareTransaction {
   Instructions instructions = 2;
 }
 
+message RequestSign {
+  string txJSON = 1;
+  string secret = 2;
+}
+
+message ResponseSign {
+  string txID = 1;
+  string txBlob = 2;
+}
+
 // RippleAPI 
 service RippleAPI {
   // https://xrpl.org/rippleapi-reference.html#preparetransaction
   rpc PrepareTransaction(RequestPrepareTransaction) returns (ResponsePrepareTransaction) {}
+  rpc SignTransaction(RequestSign) returns (ResponseSign) {}
 }
