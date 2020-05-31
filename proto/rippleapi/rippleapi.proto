@@ -75,6 +75,14 @@ message ResponseWaitValidation {
   uint32 ledgerVersion = 1;
 }
 
+message RequestGetTransaction {
+  string txID = 1;
+}
+
+message ResponseGetTransaction {
+  string resultJSONString = 1;
+}
+
 // RippleAPI 
 service RippleAPI {
   // https://xrpl.org/rippleapi-reference.html#preparetransaction
@@ -82,4 +90,5 @@ service RippleAPI {
   rpc SignTransaction(RequestSignTransaction) returns (ResponseSignTransaction) {}
   rpc SubmitTransaction(RequestSubmitTransaction) returns (ResponseSubmitTransaction) {}
   rpc WaitValidation(google.protobuf.Empty) returns (stream ResponseWaitValidation) {}
+  rpc GetTransaction(RequestGetTransaction) returns (ResponseGetTransaction) {}
 }
