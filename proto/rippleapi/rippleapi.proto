@@ -81,6 +81,7 @@ message RequestGetTransaction {
 
 message ResponseGetTransaction {
   string resultJSONString = 1;
+  string errorMessage = 2;
 }
 
 // RippleAPI 
