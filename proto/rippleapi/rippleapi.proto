@@ -32,10 +32,10 @@ enum EnumTransactionType {
 message Instructions {
   string fee = 1;
   string maxFee = 2;
-  uint32 maxLedgerVersion = 3;
-  uint32 maxLedgerVersionOffset = 4;
-  uint32 sequence = 5;
-  uint32 signersCount = 6;
+  uint64 maxLedgerVersion = 3;
+  uint64 maxLedgerVersionOffset = 4;
+  uint64 sequence = 5;
+  uint64 signersCount = 6;
 }
 
 message RequestPrepareTransaction {
@@ -68,16 +68,16 @@ message RequestSubmitTransaction {
 
 message ResponseSubmitTransaction {
   string resultJSONString = 1;
-  uint32 earliestLedgerVersion = 2;
+  uint64 earliestLedgerVersion = 2;
 }
 
 message ResponseWaitValidation {
-  uint32 ledgerVersion = 1;
+  uint64 ledgerVersion = 1;
 }
 
 message RequestGetTransaction {
   string txID = 1;
-  uint32 minLedgerVersion = 2;
+  uint64 minLedgerVersion = 2;
 }
 
 message ResponseGetTransaction {
