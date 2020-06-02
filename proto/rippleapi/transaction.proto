@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package rippleapi;
+package rippleapi.transaction;
 
-option java_package = "com.github.hiromaily.ripple-lib.protobuf";
-option java_outer_classname = "RippleAPI";
+option java_package = "com.github.hiromaily.ripple-lib";
+option java_outer_classname = "RippleTransactionAPI";
 option go_package = "rippleapi";
 
 import "google/protobuf/empty.proto";
@@ -85,8 +85,8 @@ message ResponseGetTransaction {
   string errorMessage = 2;
 }
 
-// RippleAPI 
-service RippleAPI {
+// RippleTransactionAPI 
+service RippleTransactionAPI {
   // https://xrpl.org/rippleapi-reference.html#preparetransaction
   rpc PrepareTransaction(RequestPrepareTransaction) returns (ResponsePrepareTransaction) {}
   rpc SignTransaction(RequestSignTransaction) returns (ResponseSignTransaction) {}
