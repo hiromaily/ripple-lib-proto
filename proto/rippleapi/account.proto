@@ -10,11 +10,11 @@ option go_package = "rippleapi";
 
 message RequestGetAccountInfo {
   string address = 1;
-  uint64 ledgerVersion = 2;
+  //uint64 ledgerVersion = 2;
 }
 
 message ResponseGetAccountInfo {
-  string sequence = 1;
+  uint64 sequence = 1;
   string xrpBalance = 2;
   uint64 ownerCount = 3;
   string previousAffectingTransactionID = 4;
