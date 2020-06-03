@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package rippleapi.address;
+
+option java_package = "com.github.hiromaily.ripple-lib";
+option java_outer_classname = "RippleAddressAPI";
+option go_package = "rippleapi";
+
+import "google/protobuf/empty.proto";
+
+message ResponseGenerateAddress {
+  string xAddress = 1;
+  string classicAddress = 2;
+  string address = 3;
+  string secret = 4;
+}
+
+message ResponseGenerateXAddress {
+  string xAddress = 1;
+  string secret = 2;
+}
+
+message RequestIsValidAddress {
+  string address = 1;
+}
+
+message ResponseIsValidAddress {
+  bool isValid = 1;
+}
+
+// RippleAddressAPI 
+service RippleAddressAPI {
+  // https://xrpl.org/rippleapi-reference.html#generateaddress
+  rpc GenerateAddress(google.protobuf.Empty) returns (ResponseGenerateAddress) {}
+  // https://xrpl.org/rippleapi-reference.html#generatexaddress
+  rpc GenerateXAddress(google.protobuf.Empty) returns (ResponseGenerateXAddress) {}
+  // https://xrpl.org/rippleapi-reference.html#isvalidaddress
+  rpc IsValidAddress(RequestIsValidAddress) returns (ResponseIsValidAddress) {}
+}
