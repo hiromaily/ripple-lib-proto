@@ -85,6 +85,15 @@ message ResponseGetTransaction {
   string errorMessage = 2;
 }
 
+message RequestCombineTransaction {
+  repeated string signedTransactions = 1;
+}
+
+message ResponseCombineTransaction {
+  string signedTransaction = 1;
+  string txID = 2;
+}
+
 // RippleTransactionAPI 
 service RippleTransactionAPI {
   // https://xrpl.org/rippleapi-reference.html#preparetransaction
@@ -93,4 +102,5 @@ service RippleTransactionAPI {
   rpc SubmitTransaction(RequestSubmitTransaction) returns (ResponseSubmitTransaction) {}
   rpc WaitValidation(google.protobuf.Empty) returns (stream ResponseWaitValidation) {}
   rpc GetTransaction(RequestGetTransaction) returns (ResponseGetTransaction) {}
+  rpc CombineTransaction(RequestCombineTransaction) returns (ResponseCombineTransaction) {}
 }

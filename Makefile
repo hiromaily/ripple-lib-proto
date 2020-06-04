@@ -17,6 +17,7 @@ GOGO_MODULES=Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,Mgo
 .PHONY:init
 init: update
 	brew install protobuf
+	brew install prototool
 
 .PHONY:update
 update:
@@ -30,6 +31,10 @@ update:
 	# The --gogoslick_out flag
 	go get -u github.com/gogo/protobuf/protoc-gen-gogoslick
 
+
+.PHONY:lint
+lint:
+	prototool lint
 
 ###############################################################################
 # Build
