@@ -4,8 +4,12 @@
 package rippleapi
 
 import (
+	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -268,6 +272,89 @@ func valueToGoStringAccount(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// RippleAccountAPIClient is the client API for RippleAccountAPI service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type RippleAccountAPIClient interface {
+	// https://xrpl.org/rippleapi-reference.html#getaccountinfo
+	GetAccountInfo(ctx context.Context, in *RequestGetAccountInfo, opts ...grpc.CallOption) (*ResponseGetAccountInfo, error)
+}
+
+type rippleAccountAPIClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRippleAccountAPIClient(cc *grpc.ClientConn) RippleAccountAPIClient {
+	return &rippleAccountAPIClient{cc}
+}
+
+func (c *rippleAccountAPIClient) GetAccountInfo(ctx context.Context, in *RequestGetAccountInfo, opts ...grpc.CallOption) (*ResponseGetAccountInfo, error) {
+	out := new(ResponseGetAccountInfo)
+	err := c.cc.Invoke(ctx, "/rippleapi.account.RippleAccountAPI/GetAccountInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RippleAccountAPIServer is the server API for RippleAccountAPI service.
+type RippleAccountAPIServer interface {
+	// https://xrpl.org/rippleapi-reference.html#getaccountinfo
+	GetAccountInfo(context.Context, *RequestGetAccountInfo) (*ResponseGetAccountInfo, error)
+}
+
+// UnimplementedRippleAccountAPIServer can be embedded to have forward compatible implementations.
+type UnimplementedRippleAccountAPIServer struct {
+}
+
+func (*UnimplementedRippleAccountAPIServer) GetAccountInfo(ctx context.Context, req *RequestGetAccountInfo) (*ResponseGetAccountInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountInfo not implemented")
+}
+
+func RegisterRippleAccountAPIServer(s *grpc.Server, srv RippleAccountAPIServer) {
+	s.RegisterService(&_RippleAccountAPI_serviceDesc, srv)
+}
+
+func _RippleAccountAPI_GetAccountInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestGetAccountInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RippleAccountAPIServer).GetAccountInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rippleapi.account.RippleAccountAPI/GetAccountInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RippleAccountAPIServer).GetAccountInfo(ctx, req.(*RequestGetAccountInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RippleAccountAPI_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "rippleapi.account.RippleAccountAPI",
+	HandlerType: (*RippleAccountAPIServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAccountInfo",
+			Handler:    _RippleAccountAPI_GetAccountInfo_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rippleapi/account.proto",
+}
+
 func (m *RequestGetAccountInfo) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)

@@ -4,10 +4,14 @@
 package rippleapi
 
 import (
+	context "context"
 	encoding_binary "encoding/binary"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
-	_ "github.com/gogo/protobuf/types"
+	types "github.com/gogo/protobuf/types"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -1312,6 +1316,297 @@ func valueToGoStringTransaction(v interface{}, typ string) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
 }
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// RippleTransactionAPIClient is the client API for RippleTransactionAPI service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type RippleTransactionAPIClient interface {
+	// https://xrpl.org/rippleapi-reference.html#preparetransaction
+	PrepareTransaction(ctx context.Context, in *RequestPrepareTransaction, opts ...grpc.CallOption) (*ResponsePrepareTransaction, error)
+	SignTransaction(ctx context.Context, in *RequestSignTransaction, opts ...grpc.CallOption) (*ResponseSignTransaction, error)
+	SubmitTransaction(ctx context.Context, in *RequestSubmitTransaction, opts ...grpc.CallOption) (*ResponseSubmitTransaction, error)
+	WaitValidation(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (RippleTransactionAPI_WaitValidationClient, error)
+	GetTransaction(ctx context.Context, in *RequestGetTransaction, opts ...grpc.CallOption) (*ResponseGetTransaction, error)
+	CombineTransaction(ctx context.Context, in *RequestCombineTransaction, opts ...grpc.CallOption) (*ResponseCombineTransaction, error)
+}
+
+type rippleTransactionAPIClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRippleTransactionAPIClient(cc *grpc.ClientConn) RippleTransactionAPIClient {
+	return &rippleTransactionAPIClient{cc}
+}
+
+func (c *rippleTransactionAPIClient) PrepareTransaction(ctx context.Context, in *RequestPrepareTransaction, opts ...grpc.CallOption) (*ResponsePrepareTransaction, error) {
+	out := new(ResponsePrepareTransaction)
+	err := c.cc.Invoke(ctx, "/rippleapi.transaction.RippleTransactionAPI/PrepareTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rippleTransactionAPIClient) SignTransaction(ctx context.Context, in *RequestSignTransaction, opts ...grpc.CallOption) (*ResponseSignTransaction, error) {
+	out := new(ResponseSignTransaction)
+	err := c.cc.Invoke(ctx, "/rippleapi.transaction.RippleTransactionAPI/SignTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rippleTransactionAPIClient) SubmitTransaction(ctx context.Context, in *RequestSubmitTransaction, opts ...grpc.CallOption) (*ResponseSubmitTransaction, error) {
+	out := new(ResponseSubmitTransaction)
+	err := c.cc.Invoke(ctx, "/rippleapi.transaction.RippleTransactionAPI/SubmitTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rippleTransactionAPIClient) WaitValidation(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (RippleTransactionAPI_WaitValidationClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_RippleTransactionAPI_serviceDesc.Streams[0], "/rippleapi.transaction.RippleTransactionAPI/WaitValidation", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &rippleTransactionAPIWaitValidationClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type RippleTransactionAPI_WaitValidationClient interface {
+	Recv() (*ResponseWaitValidation, error)
+	grpc.ClientStream
+}
+
+type rippleTransactionAPIWaitValidationClient struct {
+	grpc.ClientStream
+}
+
+func (x *rippleTransactionAPIWaitValidationClient) Recv() (*ResponseWaitValidation, error) {
+	m := new(ResponseWaitValidation)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *rippleTransactionAPIClient) GetTransaction(ctx context.Context, in *RequestGetTransaction, opts ...grpc.CallOption) (*ResponseGetTransaction, error) {
+	out := new(ResponseGetTransaction)
+	err := c.cc.Invoke(ctx, "/rippleapi.transaction.RippleTransactionAPI/GetTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rippleTransactionAPIClient) CombineTransaction(ctx context.Context, in *RequestCombineTransaction, opts ...grpc.CallOption) (*ResponseCombineTransaction, error) {
+	out := new(ResponseCombineTransaction)
+	err := c.cc.Invoke(ctx, "/rippleapi.transaction.RippleTransactionAPI/CombineTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RippleTransactionAPIServer is the server API for RippleTransactionAPI service.
+type RippleTransactionAPIServer interface {
+	// https://xrpl.org/rippleapi-reference.html#preparetransaction
+	PrepareTransaction(context.Context, *RequestPrepareTransaction) (*ResponsePrepareTransaction, error)
+	SignTransaction(context.Context, *RequestSignTransaction) (*ResponseSignTransaction, error)
+	SubmitTransaction(context.Context, *RequestSubmitTransaction) (*ResponseSubmitTransaction, error)
+	WaitValidation(*types.Empty, RippleTransactionAPI_WaitValidationServer) error
+	GetTransaction(context.Context, *RequestGetTransaction) (*ResponseGetTransaction, error)
+	CombineTransaction(context.Context, *RequestCombineTransaction) (*ResponseCombineTransaction, error)
+}
+
+// UnimplementedRippleTransactionAPIServer can be embedded to have forward compatible implementations.
+type UnimplementedRippleTransactionAPIServer struct {
+}
+
+func (*UnimplementedRippleTransactionAPIServer) PrepareTransaction(ctx context.Context, req *RequestPrepareTransaction) (*ResponsePrepareTransaction, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PrepareTransaction not implemented")
+}
+func (*UnimplementedRippleTransactionAPIServer) SignTransaction(ctx context.Context, req *RequestSignTransaction) (*ResponseSignTransaction, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SignTransaction not implemented")
+}
+func (*UnimplementedRippleTransactionAPIServer) SubmitTransaction(ctx context.Context, req *RequestSubmitTransaction) (*ResponseSubmitTransaction, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitTransaction not implemented")
+}
+func (*UnimplementedRippleTransactionAPIServer) WaitValidation(req *types.Empty, srv RippleTransactionAPI_WaitValidationServer) error {
+	return status.Errorf(codes.Unimplemented, "method WaitValidation not implemented")
+}
+func (*UnimplementedRippleTransactionAPIServer) GetTransaction(ctx context.Context, req *RequestGetTransaction) (*ResponseGetTransaction, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTransaction not implemented")
+}
+func (*UnimplementedRippleTransactionAPIServer) CombineTransaction(ctx context.Context, req *RequestCombineTransaction) (*ResponseCombineTransaction, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CombineTransaction not implemented")
+}
+
+func RegisterRippleTransactionAPIServer(s *grpc.Server, srv RippleTransactionAPIServer) {
+	s.RegisterService(&_RippleTransactionAPI_serviceDesc, srv)
+}
+
+func _RippleTransactionAPI_PrepareTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestPrepareTransaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RippleTransactionAPIServer).PrepareTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rippleapi.transaction.RippleTransactionAPI/PrepareTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RippleTransactionAPIServer).PrepareTransaction(ctx, req.(*RequestPrepareTransaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RippleTransactionAPI_SignTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSignTransaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RippleTransactionAPIServer).SignTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rippleapi.transaction.RippleTransactionAPI/SignTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RippleTransactionAPIServer).SignTransaction(ctx, req.(*RequestSignTransaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RippleTransactionAPI_SubmitTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSubmitTransaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RippleTransactionAPIServer).SubmitTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rippleapi.transaction.RippleTransactionAPI/SubmitTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RippleTransactionAPIServer).SubmitTransaction(ctx, req.(*RequestSubmitTransaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RippleTransactionAPI_WaitValidation_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(types.Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(RippleTransactionAPIServer).WaitValidation(m, &rippleTransactionAPIWaitValidationServer{stream})
+}
+
+type RippleTransactionAPI_WaitValidationServer interface {
+	Send(*ResponseWaitValidation) error
+	grpc.ServerStream
+}
+
+type rippleTransactionAPIWaitValidationServer struct {
+	grpc.ServerStream
+}
+
+func (x *rippleTransactionAPIWaitValidationServer) Send(m *ResponseWaitValidation) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _RippleTransactionAPI_GetTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestGetTransaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RippleTransactionAPIServer).GetTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rippleapi.transaction.RippleTransactionAPI/GetTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RippleTransactionAPIServer).GetTransaction(ctx, req.(*RequestGetTransaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RippleTransactionAPI_CombineTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestCombineTransaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RippleTransactionAPIServer).CombineTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rippleapi.transaction.RippleTransactionAPI/CombineTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RippleTransactionAPIServer).CombineTransaction(ctx, req.(*RequestCombineTransaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RippleTransactionAPI_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "rippleapi.transaction.RippleTransactionAPI",
+	HandlerType: (*RippleTransactionAPIServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PrepareTransaction",
+			Handler:    _RippleTransactionAPI_PrepareTransaction_Handler,
+		},
+		{
+			MethodName: "SignTransaction",
+			Handler:    _RippleTransactionAPI_SignTransaction_Handler,
+		},
+		{
+			MethodName: "SubmitTransaction",
+			Handler:    _RippleTransactionAPI_SubmitTransaction_Handler,
+		},
+		{
+			MethodName: "GetTransaction",
+			Handler:    _RippleTransactionAPI_GetTransaction_Handler,
+		},
+		{
+			MethodName: "CombineTransaction",
+			Handler:    _RippleTransactionAPI_CombineTransaction_Handler,
+		},
+	},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "WaitValidation",
+			Handler:       _RippleTransactionAPI_WaitValidation_Handler,
+			ServerStreams: true,
+		},
+	},
+	Metadata: "rippleapi/transaction.proto",
+}
+
 func (m *Instructions) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
