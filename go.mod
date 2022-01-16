@@ -1,4 +1,4 @@
-module github.com/hiromaily/ripple-lib-proto
+module github.com/hiromaily/ripple-lib-proto/v2
 
 go 1.16
 
