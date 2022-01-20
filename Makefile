@@ -1,12 +1,8 @@
 PWD=$(shell pwd)
 UID=$(shell id -u)
-#UNAME=$(shell id -un)
 UNAME=$(shell whoami)
 GNAME=$(shell id -gn)
 
-# All inclusive Protocol Buffer and gRPC suite, but it's not maintained much
-# https://github.com/znly/docker-protobuf
-#PROTOC_BIN=docker run --rm -v $(PWD):$(PWD) -w $(PWD) znly/protoc:0.4.0
 PROTOC_BIN=protoc
 
 GOGO_MODULES=Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/empty.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types
@@ -14,52 +10,45 @@ GOGO_MODULES=Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,Mgo
 ###############################################################################
 # Setup
 ###############################################################################
-.PHONY:init
-init: update
+.PHONY:install
+install:
 	brew install protobuf
 	brew install prototool
 
-.PHONY:update
-update:
-	go get -u github.com/gogo/protobuf
+.PHONY:install-plugin
+install-plugin:
 	# refer to https://developers.google.com/protocol-buffers/docs/reference/go-generated
 	# provides a protoc-gen-go binary which protoc uses when invoked with the --go_out command-line flag.
 	# The --go_out flag
-	go get -u github.com/golang/protobuf/protoc-gen-go
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+	# The go-grpc_out flag
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 	# The --gofast_out flag
-	go get -u github.com/gogo/protobuf/protoc-gen-gofast
+	go install github.com/gogo/protobuf/protoc-gen-gofast@latest
 	# The --gogoslick_out flag
-	go get -u github.com/gogo/protobuf/protoc-gen-gogoslick
+	go install github.com/gogo/protobuf/protoc-gen-gogoslick@latest
 
-
-.PHONY:lint
-lint:
+.PHONY:proto-lint
+proto-lint:
 	prototool lint
 
-###############################################################################
-# Build
-###############################################################################
+.PHONY:get-proto
+get-proto:
+	./scripts/get_proto.sh
 
 # protoc command
-.PHONY:build-go
-build-go:
-	# e.g. protoc -I=$SRC_DIR --go_out=$DST_DIR $SRC_DIR/addressbook.proto
-	$(PROTOC_BIN) --proto_path=proto -I=. \
-		--gogoslick_out=$(GOGO_MODULES):./pb/go/ proto/**/*.proto
-	chown -R $(UNAME):$(GNAME) ./pb/go
+.PHONY:protoc-go
+protoc-go: clean
+	$(PROTOC_BIN) \
+	--go_out=./pb/go/rippleapi/ --go_opt=paths=source_relative \
+	--go-grpc_out=./pb/go/rippleapi/ --go-grpc_opt=paths=source_relative  \
+	--proto_path=./proto/rippleapi \
+	--proto_path=./proto/third_party \
+	proto/**/*.proto
 
-.PHONY:grpc
-grpc-go:
-	# e.g. protoc -I=$SRC_DIR --go_out=$DST_DIR $SRC_DIR/addressbook.proto
-	$(PROTOC_BIN) --proto_path=proto -I=. \
-		--gogoslick_out=plugins=grpc,$(GOGO_MODULES):./pb/go/ proto/**/*.proto
-	chown -R $(UNAME):$(GNAME) ./pb/go
-
-#.PHONY:java
-#java:
 #	$(PROTOC_BIN) --proto_path=proto -I=. \
-#		--java_out=./pb/java/src/main/java proto/**/*.proto
-#	chown -R $(whoami):$(whoami) ./pb/java
+#	--gogoslick_out=$(GOGO_MODULES):./pb/go/ proto/**/*.proto
+#	chown -R $(UNAME):$(GNAME) ./pb/go
 
 clean:
-	rm -rf pb/go/*
+	rm -rf pb/go/rippleapi/*.go

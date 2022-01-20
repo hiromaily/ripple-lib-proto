@@ -2,9 +2,7 @@ syntax = "proto3";
 
 package rippleapi.address;
 
-option java_package = "com.github.hiromaily.ripple-lib";
-option java_outer_classname = "RippleAddressAPI";
-option go_package = "rippleapi";
+option go_package = "github.com/hiromaily/ripple-lib-proto/rippleapi/pb/go/rippleapi";
 
 import "google/protobuf/empty.proto";
 
